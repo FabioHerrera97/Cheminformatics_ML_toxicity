@@ -40,3 +40,20 @@ class LLMsEncoding:
                 embeddings_cls[i] = embedding
 
         return embeddings_cls.numpy()
+    
+    def main():
+    
+        smiles_list = ['CCO', 'C1=CC=CC=C1', 'CC(=O)O']
+
+        print('Performing ChemBERTa embedding \n')
+        chemberta_embeddings = LLMsEncoding.featurize(smiles_list, 'DeepChem/ChemBERTa-77M-MTR')
+        print(f'{chemberta_embeddings}\n')
+        print('Performing MolFormer \n')
+        molformer_embeddings = LLMsEncoding.featurize(smiles_list, 'MolFormer/MolFormer')
+        print(f'{molformer_embeddings}\n')
+        print('Performing MolBERT \n')
+        molbert_embeddings = LLMsEncoding.featurize(smiles_list, 'MolBERT/MolBERT')
+        print(molbert_embeddings)
+
+    if __name__ == 'main':
+        main()
