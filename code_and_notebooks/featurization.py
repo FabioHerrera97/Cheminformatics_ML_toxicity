@@ -1,4 +1,5 @@
 import torch
+import pandas as pd
 from tqdm import tqdm
 from transformers import AutoModelForMaskedLM, AutoTokenizer
 
@@ -43,7 +44,7 @@ class LLMsEncoding:
                 embedding = model_output[0][::, 0, ::]
                 embeddings_cls[i] = embedding
 
-        return embeddings_cls.numpy()
+        return pd.DataFrame(embeddings_cls.numpy())
     
 def main():
     
@@ -59,7 +60,7 @@ def main():
     selformer_embeddings = LLMsEncoding.featurize(smiles_list, 'HUBioDataLab/SELFormer', 800)
     print(selformer_embeddings)
 
-main()
+#main() # uncomment this line tu run the test
 
 if __name__ == 'main':
     main()
